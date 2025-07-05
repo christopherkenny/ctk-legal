@@ -46,6 +46,15 @@ $if(fontsize)$
 $elseif(brand.typography.base.size)$
   fontsize: $brand.typography.base.size$,
 $endif$
+$if(mathfont)$
+  mathfont: ($for(mathfont)$"$mathfont$",$endfor$),
+$endif$
+$if(codefont)$
+  codefont: ($for(codefont)$"$codefont$",$endfor$),
+$endif$
+$if(linestretch)$
+  linestretch: $linestretch$,
+$endif$
 $if(title)$
 $if(brand.typography.headings.family)$
   heading-family: ("$brand.typography.headings.family$",),
@@ -70,6 +79,15 @@ $if(section-numbering)$
   sectionnumbering: "$section-numbering$",
 $endif$
   pagenumbering: $if(page-numbering)$"$page-numbering$"$else$none$endif$,
+$if(linkcolor)$
+  linkcolor: [$linkcolor$],
+$endif$
+$if(citecolor)$
+  citecolor: [$citecolor$],
+$endif$
+$if(filecolor)$
+  filecolor: [$filecolor$],
+$endif$
 $if(toc)$
   toc: $toc$,
 $endif$

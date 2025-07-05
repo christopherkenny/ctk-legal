@@ -12,6 +12,9 @@
   region: "US",
   font: "libertinus serif",
   fontsize: 11pt,
+  mathfont: none,
+  codefont: none,
+  linestretch: 1,
   title-size: 1.5em,
   subtitle-size: 1.25em,
   heading-family: "libertinus serif",
@@ -20,6 +23,9 @@
   heading-color: black,
   heading-line-height: 0.65em,
   sectionnumbering: none,
+  linkcolor: none,
+  citecolor: none,
+  filecolor: none,
   pagenumbering: "1",
   toc: false,
   toc_title: none,
@@ -27,17 +33,44 @@
   toc_indent: 1.5em,
   doc,
 ) = {
+
+  set document(
+    title: title
+  )
+
   set page(
     paper: paper,
     margin: margin,
     numbering: pagenumbering,
   )
-  set par(justify: true)
-  set text(lang: lang,
+  set par(
+    justify: true,
+    leading: linestretch * 0.65em
+  )
+  set text(
+    lang: lang,
            region: region,
            font: font,
-           size: fontsize)
+           size: fontsize
+           )
+
+  show math.equation: set text(font: mathfont) if mathfont != none
+  show raw: set text(font: codefont) if codefont != none
+
   set heading(numbering: sectionnumbering)
+
+  show link: set text(fill: rgb(content-to-string(linkcolor))) if linkcolor != none
+  show ref: set text(fill: rgb(content-to-string(citecolor))) if citecolor != none
+  show link: this => {
+    if filecolor != none and type(this.dest) == label {
+      text(this, fill: rgb(content-to-string(filecolor)))
+    } else {
+      this
+    }
+  }
+
+
+
   if title != none {
     align(center)[#block(inset: 2em)[
       #set par(leading: heading-line-height)
