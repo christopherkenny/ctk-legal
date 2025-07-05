@@ -34,9 +34,7 @@
   doc,
 ) = {
 
-  set document(
-    title: title
-  )
+  set document(title: title)
 
   set page(
     paper: paper,
@@ -45,22 +43,26 @@
   )
   set par(
     justify: true,
-    leading: linestretch * 0.65em
+    leading: linestretch * 0.65em,
   )
   set text(
     lang: lang,
-           region: region,
-           font: font,
-           size: fontsize
-           )
+    region: region,
+    font: font,
+    size: fontsize,
+  )
 
   show math.equation: set text(font: mathfont) if mathfont != none
   show raw: set text(font: codefont) if codefont != none
 
   set heading(numbering: sectionnumbering)
 
-  show link: set text(fill: rgb(content-to-string(linkcolor))) if linkcolor != none
-  show ref: set text(fill: rgb(content-to-string(citecolor))) if citecolor != none
+  show link: set text(
+    fill: rgb(content-to-string(linkcolor)),
+  ) if linkcolor != none
+  show ref: set text(
+    fill: rgb(content-to-string(citecolor)),
+  ) if citecolor != none
   show link: this => {
     if filecolor != none and type(this.dest) == label {
       text(this, fill: rgb(content-to-string(filecolor)))
@@ -73,24 +75,29 @@
 
   if title != none {
     align(center)[#block(inset: 2em)[
-      #set par(leading: heading-line-height)
-      #if (heading-family != none or heading-weight != "bold" or heading-style != "normal"
-           or heading-color != black or heading-decoration == "underline"
-           or heading-background-color != none) {
-        set text(font: heading-family, weight: heading-weight, style: heading-style, fill: heading-color)
-        text(size: title-size)[#title]
-        if subtitle != none {
-          parbreak()
-          text(size: subtitle-size)[#subtitle]
+        #set par(leading: heading-line-height)
+        #if (
+          heading-family != none or heading-weight != "bold" or heading-style != "normal" or heading-color != black or heading-decoration == "underline" or heading-background-color != none
+        ) {
+          set text(
+            font: heading-family,
+            weight: heading-weight,
+            style: heading-style,
+            fill: heading-color,
+          )
+          text(size: title-size)[#title]
+          if subtitle != none {
+            parbreak()
+            text(size: subtitle-size)[#subtitle]
+          }
+        } else {
+          text(weight: "bold", size: title-size)[#title]
+          if subtitle != none {
+            parbreak()
+            text(weight: "bold", size: subtitle-size)[#subtitle]
+          }
         }
-      } else {
-        text(weight: "bold", size: title-size)[#title]
-        if subtitle != none {
-          parbreak()
-          text(weight: "bold", size: subtitle-size)[#subtitle]
-        }
-      }
-    ]]
+      ]]
   }
 
   if authors != none {
@@ -99,25 +106,23 @@
     grid(
       columns: (1fr,) * ncols,
       row-gutter: 1.5em,
-      ..authors.map(author =>
-          align(center)[
-            #author.name \
-            #author.affiliation \
-            #author.email
-          ]
-      )
+      ..authors.map(author => align(center)[
+        #author.name \
+        #author.affiliation \
+        #author.email
+      ])
     )
   }
 
   if date != none {
     align(center)[#block(inset: 1em)[
-      #date
-    ]]
+        #date
+      ]]
   }
 
   if abstract != none {
     block(inset: 2em)[
-    #text(weight: "semibold")[#abstract-title] #h(1em) #abstract
+      #text(weight: "semibold")[#abstract-title] #h(1em) #abstract
     ]
   }
 
@@ -128,11 +133,11 @@
       toc_title
     }
     block(above: 0em, below: 2em)[
-    #outline(
-      title: toc_title,
-      depth: toc_depth,
-      indent: toc_indent
-    );
+      #outline(
+        title: toc_title,
+        depth: toc_depth,
+        indent: toc_indent,
+      );
     ]
   }
 
@@ -145,5 +150,5 @@
 
 #set table(
   inset: 6pt,
-  stroke: none
+  stroke: none,
 )
