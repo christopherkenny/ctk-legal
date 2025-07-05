@@ -71,6 +71,16 @@
     }
   }
 
+  let cnt_para = counter("para")
+  let step = cnt_para.step()
+  let n_para = context cnt_para.display()
+  show par: it => {
+    if it.body.at("children", default: ()).at(0, default: none) == step {
+      return it
+    }
+    par(step + [#n_para. ] + it.body)
+  }
+
 
 
   if title != none {
