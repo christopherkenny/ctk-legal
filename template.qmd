@@ -1,7 +1,8 @@
 ---
 title: Untitled
 format:
-  ctk-legal-typst: default
+  ctk-legal-typst:
+    keep-typ: false
 ---
 
 ## Introduction
@@ -10,9 +11,6 @@ format:
 
 ## More Information
 
-You can learn more about creating custom Typst templates here: 
+You can learn more about creating custom Typst templates here:
 
 <https://quarto.org/docs/prerelease/1.4/typst.html#custom-formats>
-
-
-
