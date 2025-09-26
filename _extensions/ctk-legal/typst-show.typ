@@ -58,6 +58,8 @@ $endif$
 $if(title)$
 $if(brand.typography.headings.family)$
   heading-family: ("$brand.typography.headings.family$",),
+$else$
+  heading-family: ("$mainfont$",),
 $endif$
 $if(brand.typography.headings.weight)$
   heading-weight: $brand.typography.headings.weight$,
@@ -98,6 +100,9 @@ $if(toc-indent)$
   toc_indent: $toc-indent$,
 $endif$
   toc_depth: $toc-depth$,
+$if(draft)$
+  draft: $draft$,
+$endif$
   cols: $if(columns)$$columns$$else$1$endif$,
   doc,
 )

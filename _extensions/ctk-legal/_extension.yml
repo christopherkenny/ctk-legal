@@ -8,4 +8,21 @@ contributes:
       template-partials:
         - typst-template.typ
         - typst-show.typ
-
+        - biblio.typ
+      filters:
+        - typst-function
+      toc: true
+      toc-title: "Table of Contents"
+      mainfont:
+        - "Spectral"
+      codefont:
+        - "Fira Code"
+      date-format: long
+      linestretch: 1.25
+      linkcolor: "#800000"
+      bibliographystyle: chicago-author-date
+      biblio-title: References
+      section-numbering: "I.A."
+      execute:
+        echo: false
+        warning: false

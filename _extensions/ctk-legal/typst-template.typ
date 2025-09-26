@@ -1,3 +1,17 @@
+#let to-string(content) = {
+  if content == none {
+    ""
+  } else if content.has("text") {
+    content.text
+  } else if content.has("children") {
+    content.children.map(to-string).join("")
+  } else if content.has("body") {
+    to-string(content.body)
+  } else if content == [ ] {
+    " "
+  }
+}
+
 #let article(
   title: none,
   subtitle: none,
@@ -31,6 +45,7 @@
   toc_title: none,
   toc_depth: none,
   toc_indent: 1.5em,
+  draft: false,
   doc,
 ) = {
 
@@ -41,6 +56,11 @@
     margin: margin,
     numbering: pagenumbering,
   )
+  set page(
+    background: rotate(45deg,
+      text(128pt, fill: rgb("80000033"))[*DRAFT*]
+      )
+  ) if draft
   set par(
     justify: true,
     leading: linestretch * 0.65em,
@@ -56,16 +76,23 @@
   show raw: set text(font: codefont) if codefont != none
 
   set heading(numbering: sectionnumbering)
+  show heading: it => {
+    if it.numbering != none {
+      pad(left: 1em * (it.level - 1), counter(heading).display("I.A.").split(".").rev().at(1) + ". " + to-string(it.body))
+    } else {
+      it
+    }
+  }
 
   show link: set text(
-    fill: rgb(content-to-string(linkcolor)),
+    fill: rgb(to-string(linkcolor)),
   ) if linkcolor != none
   show ref: set text(
-    fill: rgb(content-to-string(citecolor)),
+    fill: rgb(to-string(citecolor)),
   ) if citecolor != none
   show link: this => {
     if filecolor != none and type(this.dest) == label {
-      text(this, fill: rgb(content-to-string(filecolor)))
+      text(this, fill: rgb(to-string(filecolor)))
     } else {
       this
     }
@@ -81,10 +108,16 @@
     par(step + [#n_para. ] + it.body)
   }
 
+  //show figure.caption: it => {
+  //  show par: p => {
+  //    return p
+  //  }
+  //  it.body
+  //}
 
 
   if title != none {
-    align(center)[#block(inset: 2em)[
+    align(center)[#block(inset: 1em)[
         #set par(leading: heading-line-height)
         #if (
           heading-family != none or heading-weight != "bold" or heading-style != "normal" or heading-color != black or heading-decoration == "underline" or heading-background-color != none
@@ -117,15 +150,13 @@
       columns: (1fr,) * ncols,
       row-gutter: 1.5em,
       ..authors.map(author => align(center)[
-        #author.name \
-        #author.affiliation \
-        #author.email
+        #author.name
       ])
     )
   }
 
   if date != none {
-    align(center)[#block(inset: 1em)[
+    align(center)[#block[
         #date
       ]]
   }
@@ -136,12 +167,31 @@
     ]
   }
 
+  if title != none or date != none or authors != none or abstract != none {
+    pagebreak()
+  }
+
   if toc {
     let title = if toc_title == none {
       auto
     } else {
       toc_title
     }
+    show outline.entry.where(
+      level: 1
+    ): set block(above: 1.3em)
+    show outline.entry: it => {
+      let pref = if it.prefix() == none {
+        ""
+      } else {
+        to-string(it.prefix()).split(".").rev().at(1) + "."
+      }
+      link(
+        it.element.location(),
+        it.indented(pref, it.inner()),
+      )
+    }
+
     block(above: 0em, below: 2em)[
       #outline(
         title: toc_title,
@@ -149,6 +199,7 @@
         indent: toc_indent,
       );
     ]
+    pagebreak()
   }
 
   if cols == 1 {
