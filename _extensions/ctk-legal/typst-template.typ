@@ -105,15 +105,16 @@
     if it.body.at("children", default: ()).at(0, default: none) == step {
       return it
     }
+
     par(step + [#n_para. ] + it.body)
   }
 
-  //show figure.caption: it => {
-  //  show par: p => {
-  //    return p
-  //  }
-  //  it.body
-  //}
+  show figure: f => {
+    show box: it => {
+      it.body
+    }
+    f
+  }
 
 
   if title != none {

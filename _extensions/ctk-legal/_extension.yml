@@ -9,6 +9,7 @@ contributes:
         - typst-template.typ
         - typst-show.typ
         - biblio.typ
+        - definitions.typ
       filters:
         - typst-function
       toc: true
