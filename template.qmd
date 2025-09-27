@@ -65,7 +65,7 @@ Caption for the figure.
 
 :::
 
-This template does not currently support subfigures, as the captions get numbered:
+This template does also support subfigures.
 
 ::: {#fig-subfig1 layout-ncol=2 cap-location=bottom}
 
