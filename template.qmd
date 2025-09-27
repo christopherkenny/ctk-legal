@@ -12,7 +12,9 @@ bibliography: bibliography.bib
 
 # Introduction
 
-Short intro 
+Short intro[^footnote]
+  
+[^footnote]: test footnote
 
 Brief description of what you've been instructed to do
 
@@ -74,4 +76,3 @@ This template does not currently support subfigures, as the captions get numbere
 Caption for the subfigures 1.
 
 :::
-
