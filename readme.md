@@ -16,7 +16,19 @@ This will install the format extension and create an example qmd file that you c
 ## Using `ctk-legal`
 
 This template is relatively simple.
-Some options you can set:
+It will create a title page, separate table of contents with simplifies section headers, and number each paragraph to allow for easy reference.
+Some relevant options you can set:
+
+- `title`: Your report's title
+- `subtitle`: Your report's subtitle
+- `author`: Author and affiliation information, following [Quarto's schema](https://quarto.org/docs/journals/authors.html). *Only name is used, in typical expert report fashion.*
+- `draft`: Adds a big "DRAFT" watermark to the document. Default is `false`.
+- `margins`: These default to a sensible 1in all-around margin
+- `mainfont`: See the fonts discussion below
+- `fontsize`: Set the default font size. Default is 11pt.
+- `linestretch`: line spacing. I recommend the default of `1.25`.
+- `linkcolor`: Add a splash of colors to your link.
+- `biblio-title`: Title for the reference section. Default: "References"
 
 ### Fonts
 
@@ -28,9 +40,7 @@ To check that it is installed, run:
 quarto typst fonts
 ```
 
-If no font by the name "Spectral" is found, it falls back to Crimson Text. This can be installed from [Google Fonts](https://fonts.google.com/specimen/Crimson+Text).
-
-If no font by the names "Spectral", "Crimson Text", or "Crimson" is found, the template falls back to Linux Libertine.
+If no font by the name "Spectral" is found, the template falls back to Linux Libertine.
 
 ## License
 

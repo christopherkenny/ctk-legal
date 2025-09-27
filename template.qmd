@@ -5,8 +5,7 @@ date: today
 draft: true
 format:
   ctk-legal-typst:
-    keep-typ: true
-    toc: true
+    keep-typ: false
 bibliography: bibliography.bib
 ---
 
