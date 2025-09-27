@@ -2,8 +2,8 @@
 
 The `ctk-legal` Quarto template is a template for expert reports and other academic court filing, designed to aesthetically align with the [`ctk-article` template](https://github.com/christopherkenny/ctk-article).
 
-<!-- pdftools::pdf_convert('template.pdf', pages = 1)
-![[template.qmd](template.qmd)](template_1.png) -->
+<!-- pdftools::pdf_convert('template.pdf', pages = 1) -->
+![[template.qmd](template.qmd)](template_1.png)
 
 ## Installing
 
