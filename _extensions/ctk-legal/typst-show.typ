@@ -103,6 +103,15 @@ $endif$
 $if(draft)$
   draft: $draft$,
 $endif$
+$if(case-jurisdiction)$
+  case-jurisdiction: [$case-jurisdiction$],
+$endif$
+$if(case-parties)$
+  case-parties: [$case-parties$],
+$endif$
+$if(case-number)$
+  case-number: "$case-number$",
+$endif$
   cols: $if(columns)$$columns$$else$1$endif$,
   doc,
 )

@@ -7,6 +7,16 @@ format:
   ctk-legal-typst:
     keep-typ: false
 bibliography: bibliography.bib
+case-jurisdiction: |
+  United States District Court
+  Southern District of New York
+case-parties: |
+  CANADA, _et. al._ 
+  
+    v.
+  
+  UNITED STATES, _et. al._
+case-number: "1:23-cv-12345"
 ---
 
 # Introduction

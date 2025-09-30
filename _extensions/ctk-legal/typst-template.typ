@@ -46,6 +46,9 @@
   toc_depth: none,
   toc_indent: 1.5em,
   draft: false,
+  case-jurisdiction: none,
+  case-parties: none,
+  case-number: none,
   doc,
 ) = {
 
@@ -98,24 +101,24 @@
     }
   }
 
-  let cnt_para = counter("para")
-  let step = cnt_para.step()
-  let n_para = context cnt_para.display()
-  show par: it => {
-    if it.body.at("children", default: ()).at(0, default: none) == step {
-      return it
-    }
-
-    par(step + [#n_para. ] + it.body)
+  if case-jurisdiction != none {
+    align(center)[#block(inset: 2em)[
+      #text(size: title-size, hyphenate: false)[#upper(case-jurisdiction)]
+    ]]
   }
 
-  show figure: f => {
-    show box: it => {
-      it.body
-    }
-    f
+  if case-parties != none or case-number != none {
+    grid(
+      columns: (1fr, 1fr),
+      rows: (25%),
+      column-gutter: 5%,
+      row-gutter: 5%,
+      align: (left + horizon, left + horizon),
+      grid.cell(stroke: (right: black, bottom: black, top: none, left: none))[
+      #case-parties],
+      [#case-number]
+    )
   }
-
 
   if title != none {
     align(center)[#block(inset: 1em)[
@@ -201,6 +204,24 @@
       );
     ]
     pagebreak()
+  }
+
+  let cnt_para = counter("para")
+  let step = cnt_para.step()
+  let n_para = context cnt_para.display()
+  show par: it => {
+    if it.body.at("children", default: ()).at(0, default: none) == step {
+      return it
+    }
+
+    par(step + [#n_para. ] + it.body)
+  }
+
+  show figure: f => {
+    show box: it => {
+      it.body
+    }
+    f
   }
 
   if cols == 1 {
