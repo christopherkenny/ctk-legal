@@ -24,6 +24,7 @@ contributes:
       bibliographystyle: chicago-author-date
       biblio-title: References
       section-numbering: "I.A."
+      syntax-highlighting: idiomatic
       execute:
         echo: false
         warning: false
